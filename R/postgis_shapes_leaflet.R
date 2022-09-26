@@ -17,26 +17,20 @@ con
 
 lga <- st_read(con,layer="lga_2020")
 
-lga_raw = sf::st_read("~/src/georgio/data-raw/LGA_2022_AUST_GDA2020_SHP/LGA_2022_AUST_GDA2020.shp")
+# Can do PostGIS queries
+#query <- paste('SELECT "LGA_CODE22", "LGA_NAME22", "GEOMETRY"',
+#               'FROM "lga_2020"',
+#               'WHERE "STE_NAME21" = "Victoria";'
+#)
+library(dbplyr)
+tbl(con,'lga_2020') %>% filter(STE_NAME21 == 'Victoria') %>% dplyr::show_query()
+vic_lga <- st_read(con,query=query)
 
 # Get some information
 st_geometry_type(lga_raw)
 sf::st_crs(lga_raw)
 class(lga_raw)
 sf_proj_info(type = "proj", lga)
-
-lga <-st_transform(lga_raw, crs = st_crs(lga_raw))
-class(lga)
-
-ggplot() +
-  geom_sf(data = lga_raw, size = 3, color = "black", fill = "cyan1") +
-  coord_sf()
-
-world_map_crs <- "+proj=eqearth +wktext"
-lga_raw %>%
-  st_transform(world_map_crs)%>%
-  ggplot() +
-  geom_sf()
 
 # Fails
 #m <- leaflet(lga_raw) %>% addPolygons(data=lga_raw$geom) %>% addProviderTiles(providers$CartoDB.Positron)

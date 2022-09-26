@@ -46,7 +46,7 @@ m <- leaflet(lga_trans) %>% addPolygons(data=lga_trans$geom) %>% addTiles() %>%
   )
 m
 
-st_write(lga_raw,dsn=con, layer="lga_copy", delete_layer=TRUE, append=FALSE)
+st_write(lga_raw,dsn=con, layer="lga_2020", delete_layer=TRUE, append=FALSE)
 
 
 
