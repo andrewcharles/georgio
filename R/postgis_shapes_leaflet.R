@@ -9,7 +9,7 @@ library(rgdal)
 con <- dbConnect(RPostgres::Postgres(),
                  dbname = 'vic',
                  host = 'localhost',
-                 port = 5432,
+                 port = 5434,
                  user = 'postgres',
                  password = 'kubexapa')
 dbListTables(con)

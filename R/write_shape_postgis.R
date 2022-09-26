@@ -10,7 +10,7 @@ library(rgdal)
 con <- dbConnect(RPostgres::Postgres(),
                  dbname = 'vic',
                  host = 'localhost',
-                 port = 5432,
+                 port = 5434,
                  user = 'postgres',
                  password = 'kubexapa')
 dbListTables(con)
@@ -34,7 +34,7 @@ lga_raw %>%
   ggplot() +
   geom_sf()
 
-lga_trans <- st_transform(st_as_sf(lga),4326)
+lga_trans <- st_transform(st_as_sf(lga_raw),4326)
 #simplified <- rmapshaper::ms_simplify(fullsize)
 
 m <- leaflet(lga_trans) %>% addPolygons(data=lga_trans$geom) %>% addTiles() %>%
@@ -46,7 +46,7 @@ m <- leaflet(lga_trans) %>% addPolygons(data=lga_trans$geom) %>% addTiles() %>%
   )
 m
 
-st_write(lga_raw,dsn=con, layer="lga_2020", delete_layer=TRUE, append=FALSE)
+st_write(lga_trans,dsn=con, layer="lga_2020", delete_layer=TRUE, append=FALSE)
 
 
 
