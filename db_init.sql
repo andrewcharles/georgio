@@ -7,4 +7,3 @@
 # docker exec -ti docked-postgis psql -U postgres -d vic -c "CREATE EXTENSION postgis;"
 
 CREATE DATABASE vic
-#CREATE table_name

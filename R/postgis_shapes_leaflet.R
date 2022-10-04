@@ -11,7 +11,7 @@ con <- dbConnect(RPostgres::Postgres(),
                  host = 'localhost',
                  port = 5434,
                  user = 'postgres',
-                 password = 'kubexapa')
+                 password = 'password')
 dbListTables(con)
 con
 
