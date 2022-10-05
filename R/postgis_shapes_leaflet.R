@@ -1,3 +1,5 @@
+# Get a spatial layer from postgis and display it
+
 library(tidyverse)
 library(leaflet)
 library(DBI)
