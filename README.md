@@ -1,2 +1,3 @@
 # georgio
-A geospatial app starter framework
+A geospatial app starter framework.
+Includes postgres setup scripts.
