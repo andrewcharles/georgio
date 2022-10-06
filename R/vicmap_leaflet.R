@@ -1,5 +1,8 @@
 library(VicmapR)
+
 VicmapR::check_geoserver()
+
+# Check what layers are available
 listLayers(pattern = "ele", ignore.case = T)
 
 melbourne <- sf::st_read(system.file("shapes/melbourne.geojson", package="VicmapR"), quiet = T)

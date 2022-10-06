@@ -1,5 +1,4 @@
-# Focus in particular on the elevation layer provided by Vicmap
-
+# Disentangle confusion around vic gov elevation data
 library(VicmapR)
 library(sf)
 library(leaflet)
