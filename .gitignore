@@ -1,6 +1,6 @@
 # Shapefile
 data-raw/LGA_2002_AUST_*
-
+inst/extdata
 # History files
 .Rhistory
 .Rapp.history

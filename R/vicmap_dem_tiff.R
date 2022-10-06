@@ -8,21 +8,24 @@ elevation_raster <- terra::rast(imgpath)
 er <- elevation_raster
 # this fails due to memory issue
 # crds(er)
+# potentially use terra options to fix this ...
 # terraOptions(memfrac=0.3)
+# this issue explains how https://github.com/rspatial/terra/issues/562
 
 # This geotiff is in LCC coordinates
-# to project it to latitude/longitude
+# project it to latitude/longitude
+
 #https://gis.stackexchange.com/questions/142156/r-how-to-get-latitudes-and-longitudes-from-a-rasterlayer
 #https://gis.stackexchange.com/questions/45263/converting-geographic-coordinate-system-in-r
+#https://stackoverflow.com/questions/36453084/plot-lat-lon-coordinates-on-geotiff-in-r
 
 library(tidyverse)
 library(raster)
-library(rgdal)
-# reproject sp object
 err<- elevation_raster%>% raster::raster()
 r.pts <- rasterToPoints(err, spatial=TRUE)
 proj4string(r.pts)
 
+library(rgdal)
 geo.prj <- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 r.pts <- spTransform(r.pts, CRS(geo.prj))
 proj4string(r.pts)
@@ -52,10 +55,9 @@ extract(r, p)
 library(sf)
 library(leaflet)
 
-
 # select a subset
 
-
+# Again, the geotiff is much to pbig to display like this
 m <- leaflet() %>% addTiles() %>% #setView(-93.65, 42.0285, zoom = 4) %>%
   leaflet::addRasterImage(elevation_raster%>% raster::raster(), opacity = 0.5)
 m
